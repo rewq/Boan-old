@@ -14,3 +14,5 @@ learned about creating menu action and followed tutorial to connect the action t
 added an about diablog
 
 enabled the qt beautifier plugin and configured the project to use the brace style we like http://astyle.sourceforge.net/astyle.html#_style=java
+
+added qt gitignore file so we dont copy over build dirs

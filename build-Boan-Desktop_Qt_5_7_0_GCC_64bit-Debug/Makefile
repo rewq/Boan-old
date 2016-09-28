@@ -57,7 +57,8 @@ OBJECTS       = main.o \
 		dialog_about.o \
 		moc_mainwindow.o \
 		moc_dialog_about.o
-DIST          = ../../../Qt/5.7/gcc_64/mkspecs/features/spec_pre.prf \
+DIST          = ../Boan/syntaxconf.astylerc \
+		../../../Qt/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/common/unix.conf \
 		../../../Qt/5.7/gcc_64/mkspecs/common/linux.conf \
 		../../../Qt/5.7/gcc_64/mkspecs/common/sanitize.conf \
@@ -188,7 +189,6 @@ DIST          = ../../../Qt/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt/5.7/gcc_64/mkspecs/features/spec_post.prf \
-		../Boan/.qmake.stash \
 		../../../Qt/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -352,7 +352,6 @@ Makefile: ../Boan/Boan.pro ../../../Qt/5.7/gcc_64/mkspecs/linux-g++/qmake.conf .
 		../../../Qt/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt/5.7/gcc_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../../Qt/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/features/default_pre.prf \
 		../../../Qt/5.7/gcc_64/mkspecs/features/resolve_config.prf \
@@ -506,7 +505,6 @@ Makefile: ../Boan/Boan.pro ../../../Qt/5.7/gcc_64/mkspecs/linux-g++/qmake.conf .
 ../../../Qt/5.7/gcc_64/mkspecs/features/qt_config.prf:
 ../../../Qt/5.7/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../Qt/5.7/gcc_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../../Qt/5.7/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt/5.7/gcc_64/mkspecs/features/default_pre.prf:
 ../../../Qt/5.7/gcc_64/mkspecs/features/resolve_config.prf:
@@ -1014,25 +1012,20 @@ mainwindow.o: ../Boan/mainwindow.cpp ../Boan/mainwindow.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.7/gcc_64/include/QtGui/qicon.h \
 		ui_mainwindow.h \
-		../../../Qt/5.7/gcc_64/include/QtCore/QVariant \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QAction \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt/5.7/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt/5.7/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt/5.7/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt/5.7/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QButtonGroup \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qbuttongroup.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QHeaderView \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qheaderview.h \
+		../Boan/dialog_about.h \
+		../../../Qt/5.7/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt/5.7/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/5.7/gcc_64/include/QtWidgets/QFileSystemModel \
+		../../../Qt/5.7/gcc_64/include/QtWidgets/qfilesystemmodel.h \
+		../../../Qt/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../Qt/5.7/gcc_64/include/QtCore/qdir.h \
+		../../../Qt/5.7/gcc_64/include/QtCore/qfileinfo.h \
+		../../../Qt/5.7/gcc_64/include/QtCore/qdiriterator.h \
+		../../../Qt/5.7/gcc_64/include/QtWidgets/QTreeView \
+		../../../Qt/5.7/gcc_64/include/QtWidgets/qtreeview.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qabstractitemview.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../Qt/5.7/gcc_64/include/QtCore/qitemselectionmodel.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
@@ -1043,21 +1036,7 @@ mainwindow.o: ../Boan/mainwindow.cpp ../Boan/mainwindow.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qstyle.h \
 		../../../Qt/5.7/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QMenu \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qmenu.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QMenuBar \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qmenubar.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QStatusBar \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qstatusbar.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QTreeView \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qtreeview.h \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QWidget \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/QFileSystemModel \
-		../../../Qt/5.7/gcc_64/include/QtWidgets/qfilesystemmodel.h \
-		../../../Qt/5.7/gcc_64/include/QtCore/qdir.h \
-		../../../Qt/5.7/gcc_64/include/QtCore/qfileinfo.h \
-		../../../Qt/5.7/gcc_64/include/QtCore/qdiriterator.h
+		../../../Qt/5.7/gcc_64/include/QtWidgets/qrubberband.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Boan/mainwindow.cpp
 
 dialog_about.o: ../Boan/dialog_about.cpp ../Boan/dialog_about.h \
