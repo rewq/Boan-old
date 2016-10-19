@@ -18,6 +18,8 @@ public:
 private slots:
     void on_actionAbout_triggered();
 
+    void on_scanButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
