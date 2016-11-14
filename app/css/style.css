@@ -1,0 +1,24 @@
+body {
+	margin: 0;
+}
+
+#menuBar {
+	background:lightgray;
+	width:100%;
+	height:10vh;
+	display: block;
+}
+#treeview {
+    width: 20vw;
+    height: 80vh;
+    overflow: scroll;
+    display: block;
+}
+#statusbar {
+	background:lightgray;
+	width:100%;
+	height:10vh;
+	overflow-y: scroll;
+	display: block;
+}
+

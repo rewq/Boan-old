@@ -1,0 +1,15 @@
+#spider {
+	border:solid 1px lightgray;
+	width:100%;
+	height:8em;
+	overflow-y: scroll;
+	display: block;
+}
+#statusbar {
+	border:solid 1px lightgray;
+	width:100%;
+	height:8em;
+	overflow-y: scroll;
+	display: block;
+}
+
