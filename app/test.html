@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Boan 보안</title>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+
+
+        <div id="treeview">
+            <ul id="tree">
+                
+            </ul>
+        </div>
+
+
+        
+    </body>
+
+    <script src="js/main.js"></script>
+</html>
+
+<script type="text/javascript">
+
+var urls = ["/testsite/secondpage/test.html/test.html","/testsite/thirdpage.html","/testsite/thirdpasge.html"];//"/testsite/thirdpage.html","/testsite/forth.html",
+
+
+var treeview = $("#tree");
+
+for (var i = urls.length - 1; i >= 0; i--) {
+
+
+    var parts = urls[i].split("/");
+        
+    for (var n = parts.length - 1; n >= 0; n--) {if (!parts[n]) {parts[n]="/"}}
+
+    insert(parts,treeview);
+}
+
+function insert(p,t) {
+
+    part = p.shift();
+
+    if (!part) {return;} 
+
+    var found = false;
+    $.each($(t).children('li'), function() {
+        
+        if ($(this).data("p") == part) {
+            t = $(this);
+            found = true;
+        }
+    });
+
+    if (!found) {
+        if (t.is("li")){
+            if (t.has('ul').length) {
+                t = $(t.children("ul")[0]);
+                p.unshift(part);
+            } else {
+                t.append("<ul><li data-p='"+part+"'>"+part+"</li></ul>");
+                p.unshift(part);
+            }
+        } else {             
+            t.append("<li data-p='"+part+"'>"+part+"</li>");
+            p.unshift(part);
+        }
+    }
+
+    insert(p,t);
+}
+</script>

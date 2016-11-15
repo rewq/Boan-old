@@ -20,15 +20,14 @@
         </div>
 
         <div id="treeview">
-            <ul>
+            <ul id="tree">
                 
             </ul>
         </div>
 
 
 		<div id="statusbar">
-			<ul>
-			</ul>
+			<ul></ul>
 		</div>
 
         

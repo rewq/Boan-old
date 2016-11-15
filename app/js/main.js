@@ -1,10 +1,13 @@
+
+console.log("=== main.js loaded ===");  // Loaded message
+
 /* GLOBALS */
 
 var pages = [];
 
 var already_searched = [];
 
-var treeview = $("#treeview ul");
+var treeview = $("#tree");
 
 var main_target = {};
 
@@ -13,28 +16,21 @@ var main_target = {};
 
 $(function() { // BEGIN DOCUMENT READY
 
-console.log("=== main.js loaded ===");  // Loaded message
-
-
 
 $('#scan').on('submit', function(e) {
-    e.preventDefault();  
+    e.preventDefault(); // Stop the form from submitting  
 
     var target = $('input[name="target"]').val();
 
-    setup(target); // set some global vars
+    setup(target); // set global vars
 
-    console.log(main_target.source);
-
-	crawl(main_target.source)
+	crawl(main_target.source);
 
 });
 
 
 $('input[name="stop_scan"]').on('click', function(e) {
     e.preventDefault();  
-
-    log("Scanner stopped");
 });
 
 
@@ -42,44 +38,33 @@ $('input[name="stop_scan"]').on('click', function(e) {
 
 
 
-/* UTILITY FUNCTIONS */
 function setup(t) {
 
  main_target = parseURL(t);
 
 }
 
-function log(t) {
-/*
-	Console logs to status bar
-*/
-	var sbar = $("#statusbar ul");
-	sbar.append('<li>'+t+'</li>');
-	$("#statusbar").scrollTop($("#statusbar")[0].scrollHeight);
-	return true;
-}
-
+// http://demo.testfire.net/bank/login.aspx  casusing problems
 function crawl(target){
-    
+
+	if ($.inArray(target, already_searched) > -1) {return;} // skip already crawled urls
+
     log("Crawling "+target);
 
+	already_searched.push(target);
+
+
     $.getJSON( "php/crawl.php", {url: target}).done(function( data ) {
-		
+
 		var indx = pages.push(data) -1; // returns index of item pushed to array
 		treeviewadd(indx,data.page);
 
-		already_searched.push(data.page.path+data.page.query);
-
 		for (var i = data.links.length - 1; i >= 0; i--) {
 
-			//console.log("php obj",data.links[i])
+			if ((data.links[i].host != undefined) && (data.links[i].host != main_target.host)) {continue;} // skip outside scope urls
 
-			console.log(main_target.path+data.links[i].path+data.links[i].query);
-
-			if ($.inArray(main_target.path+data.links[i].path+data.links[i].query, already_searched ) > -1) {
-				continue;
-			}
-			crawl(main_target.source+data.links[i].path+data.links[i].query);
+			var new_target = main_target.source+data.links[i].path+data.links[i].query;
+			crawl(new_target);
 		}
 	}); 
 
@@ -87,8 +72,63 @@ function crawl(target){
 };
 
 function treeviewadd (id, page) {
-	treeview.append('<li data-id='+id+'>'+page.path+'</li>');
+	 var path_parts = page.path.split("/");
+
+	 for (var n = path_parts.length - 1; n >= 0; n--) {if (!path_parts[n]) {path_parts[n]="/"}}
+
+	 console.log(path_parts);
+	// treeinsert(id,path_parts,treeview);
+	 insert(path_parts,treeview,id);
+	 //treeview.append('<li data-id='+id+'>'+page.source+'</li>'); // defualt
 }
+
+
+function insert(p,t,idx=0) {
+
+    part = p.shift();
+
+    if (!part) {return;} 
+
+    var found = false;
+    $.each($(t).children('li'), function() {
+        
+        if ($(this).data("p") == part) {
+            t = $(this);
+            found = true;
+        }
+    });
+
+    if (!found) {
+        if (t.is("li")){
+            if (t.has('ul').length) {
+                t = $(t.children("ul")[0]);
+                p.unshift(part);
+            } else {
+                t.append("<ul><li data-p='"+part+"' data-idx='"+idx+"'>"+part+"</li></ul>");
+                p.unshift(part);
+            }
+        } else {             
+            t.append("<li data-p='"+part+"' data-idx='"+idx+"'>"+part+"</li>");
+            p.unshift(part);
+        }
+    }
+
+    insert(p,t,idx);
+}
+
+
+// UTILITY FUNCTIONS //
+
+/*
+	Console logs to status bar
+*/
+function log(t) {
+	var sbar = $("#statusbar ul");
+	sbar.append('<li>'+t+'</li>');
+	$("#statusbar").scrollTop($("#statusbar")[0].scrollHeight);
+	return true;
+}
+
 
 function parseURL(url) {
     var parser = document.createElement('a'),
@@ -108,36 +148,3 @@ function parseURL(url) {
         hash: parser.hash
     };
 }
-
-function parseUri (str) {
-/*
-	Parses url into parts
-	Source: http://blog.stevenlevithan.com/archives/parseuri
-*/
-	var	o   = parseUri.options,
-		m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
-		uri = {},
-		i   = 14;
-
-	while (i--) uri[o.key[i]] = m[i] || "";
-
-	uri[o.q.name] = {};
-	uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-		if ($1) uri[o.q.name][$1] = $2;
-	});
-
-	return uri;
-};
-
-parseUri.options = {
-	strictMode: false,
-	key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
-	q:   {
-		name:   "queryKey",
-		parser: /(?:^|&)([^&=]*)=?([^&]*)/g
-	},
-	parser: {
-		strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-		loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
-	}
-};
