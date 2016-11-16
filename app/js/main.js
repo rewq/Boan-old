@@ -56,6 +56,8 @@ function crawl(target){
 
     $.getJSON( "php/crawl.php", {url: target}).done(function( data ) {
 
+        console.log(data.links);
+
 		var indx = pages.push(data) -1; // returns index of item pushed to array
 		treeviewadd(indx,data.page);
 
@@ -76,14 +78,13 @@ function treeviewadd (id, page) {
 
 	 for (var n = path_parts.length - 1; n >= 0; n--) {if (!path_parts[n]) {path_parts[n]="/"}}
 
-	 console.log(path_parts);
-	// treeinsert(id,path_parts,treeview);
+	
 	 insert(path_parts,treeview,id);
 	 //treeview.append('<li data-id='+id+'>'+page.source+'</li>'); // defualt
 }
 
 
-function insert(p,t,idx=0) {
+function insert(p,t,idx) {
 
     part = p.shift();
 
