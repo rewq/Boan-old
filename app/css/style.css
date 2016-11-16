@@ -22,3 +22,10 @@ body {
 	display: block;
 }
 
+#tree li {
+    color:darkgrey;
+}
+
+#tree li.ispage {
+    color:green;
+}

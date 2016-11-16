@@ -11,6 +11,8 @@ var treeview = $("#tree");
 
 var main_target = {};
 
+var scan_running = false;
+
 
 
 
@@ -24,6 +26,7 @@ $('#scan').on('submit', function(e) {
 
     setup(target); // set global vars
 
+    scan_running = true;
 	crawl(main_target.source);
 
 });
@@ -47,6 +50,8 @@ function setup(t) {
 // http://demo.testfire.net/bank/login.aspx  casusing problems
 function crawl(target){
 
+    console.log("scan_running",scan_running);
+
 	if ($.inArray(target, already_searched) > -1) {return;} // skip already crawled urls
 
     log("Crawling "+target);
@@ -56,10 +61,10 @@ function crawl(target){
 
     $.getJSON( "php/crawl.php", {url: target}).done(function( data ) {
 
-        console.log(data.links);
-
 		var indx = pages.push(data) -1; // returns index of item pushed to array
 		treeviewadd(indx,data.page);
+
+        if (!scan_running) {return;}
 
 		for (var i = data.links.length - 1; i >= 0; i--) {
 
@@ -88,13 +93,14 @@ function insert(p,t,idx) {
 
     part = p.shift();
 
-    if (!part) {return;} 
+    if (!part) {return;}
 
     var found = false;
     $.each($(t).children('li'), function() {
         
         if ($(this).data("p") == part) {
             t = $(this);
+            if (!p.length) {t.addClass("ispage");} 
             found = true;
         }
     });
@@ -149,3 +155,19 @@ function parseURL(url) {
         hash: parser.hash
     };
 }
+
+$('input[name="stop_scan"]').click(function(e){
+    e.stopPropagation();
+    console.log("scan stopped by button press");
+    scan_running = false;
+})
+
+/*$('#tree ul').hide();
+
+$('#tree li').click(function(e){
+    e.stopPropagation();
+    if(this.getElementsByTagName("ul")[0].style.display =="block")
+        $(this).find("ul").slideUp();
+    else
+        $(this).children(":first").slideDown();
+});*/

@@ -9,7 +9,6 @@
     </head>
     <body>
         <div id="menuBar">
-            <!-- <h1>Boan</h1> -->
 
     		<form id="scan">
     			<label>URL: </label>
@@ -20,8 +19,7 @@
         </div>
 
         <div id="treeview">
-            <ul id="tree">
-                
+            <ul id="tree">   
             </ul>
         </div>
 

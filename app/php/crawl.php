@@ -52,7 +52,7 @@ foreach ($urls as $url){
 	if (isset($p['query'] )) {
 		$p['query'] = "?".$p['query'];
 	} else {
-		$p['query'] = " "; // so that it is always defined
+		$p['query'] = ""; // so that it is always defined
 	}
 
 	// filter out same domain so we dont have to in js?
