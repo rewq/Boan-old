@@ -4,4 +4,3 @@
 
 #HttpOnly_demo.testfire.net	FALSE	/	FALSE	0	ASP.NET_SessionId	tgmvtj55uta5liv0ltredt55
 demo.testfire.net	FALSE	/	FALSE	0	amSessionId	4565590467
-cs.marlboro.edu	FALSE	/	FALSE	1479398415	cs_marlboro_edu	403c98ee1ad55f2b587a9852e7882cfc

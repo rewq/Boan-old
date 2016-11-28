@@ -3,6 +3,8 @@ console.log("=== main.js loaded ===");  // Loaded message
 
 /* GLOBALS */
 
+var PROBLEMS = {};
+
 var pages = [];
 
 var already_searched = [];
@@ -50,7 +52,9 @@ function setup(t) {
 // http://demo.testfire.net/bank/login.aspx  casusing problems
 function crawl(target){
 
-    console.log("scan_running",scan_running);
+    //console.log("scan_running",scan_running);
+
+    if (scan_running == false) {return;}
 
 	if ($.inArray(target, already_searched) > -1) {return;} // skip already crawled urls
 
@@ -60,6 +64,8 @@ function crawl(target){
 
 
     $.getJSON( "php/crawl.php", {url: target}).done(function( data ) {
+
+        console.log(data);
 
 		var indx = pages.push(data) -1; // returns index of item pushed to array
 		treeviewadd(indx,data.page);
@@ -160,7 +166,15 @@ $('input[name="stop_scan"]').click(function(e){
     e.stopPropagation();
     console.log("scan stopped by button press");
     scan_running = false;
-})
+});
+
+
+/* collapsable tree */
+$(document).on('click', 'li', function(){
+    $(this).children('ul').toggle();
+    return false;  
+});
+
 
 /*$('#tree ul').hide();
 

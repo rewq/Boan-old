@@ -32,6 +32,7 @@ $resp = curl_exec($ch);
 
 // Remember the Request
 $req = curl_getinfo($ch);
+$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 curl_close($ch);
 
@@ -46,8 +47,7 @@ foreach ($urls as $url){
 	$p['source'] = $url->getAttribute("href");
 
 	/* problem currently cant handle relative urls */ 
-	$p['path'] = str_replace("../", "", $p['path']);
-	$p['source'] = str_replace("../", "", $p['source']);
+	if (strpos($p['source'], '..') !== false) {continue; /* to next url */ }
 
 	if (isset($p['query'] )) {
 		$p['query'] = "?".$p['query'];
@@ -71,6 +71,7 @@ $tp['source'] = $target;
 $output = array(
 	'page' => $tp,
 	'links' => $links, 
+	'httpcode' => $httpcode
 	//'request' => $req, 
 	//'response' => htmlentities($resp), 
 );

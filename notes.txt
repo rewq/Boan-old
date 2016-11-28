@@ -1,24 +1,12 @@
 notes.txt
 
-installed qt creator
 
-downloaded linux installer through wensite https://www.qt.io/ide/ (must choose personal/academic use and agree to license)
 
-this might be a direct link to downloads https://www.qt.io/download-open-source/
 
-$ chmod +x qt-unified-linux-x64-2.0.3-1-online.run 
-$ ./qt-unified-linux-x64-2.0.3-1-online.run
+$ sudo apt install php-cli
 
-for jim http://download.qt.io/official_releases/qt/5.7/5.7.0/qt-opensource-mac-x64-clang-5.7.0.dmg
+$ sudo apt-get install php-xml
 
-learned about creating menu action and followed tutorial to connect the action to opening a new window http://www.bogotobogo.com/Qt/Qt5_MainWindowTriggerAction.php
+$ sudo apt-get install php-curl
 
-added an about diablog
-
-enabled the qt beautifier plugin and configured the project to use the brace style we like http://astyle.sourceforge.net/astyle.html#_style=java
-
-added qt gitignore file so we dont copy over build dirs
-
-where i'm headed 
-http://doc.qt.io/qt-4.8/designer-using-a-ui-file.html
-http://doc.qt.io/qt-5/qtwidgets-itemviews-editabletreemodel-example.html
+$ php -S localhost:8888

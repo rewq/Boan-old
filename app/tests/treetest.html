@@ -1,0 +1,20 @@
+
+<style type="text/css">
+	ul {visibility: visible;}
+	li {visibility: visible;}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<ul id="tree">   
+            <li data-p="/" data-idx="0">/<ul><li data-p="testsite" data-idx="0">testsite<ul><li data-p="/" data-idx="0" class="ispage">/</li><li data-p="pages" data-idx="1">pages<ul><li data-p="secondpage.html" data-idx="1" class="ispage">secondpage.html</li></ul></li><li data-p="secondpage.html" data-idx="2" class="ispage">secondpage.html</li><li data-p="vuln" data-idx="3">vuln<ul><li data-p="xss.php" data-idx="3" class="ispage">xss.php</li></ul></li><li data-p="thirdpage.html" data-idx="4" class="ispage">thirdpage.html</li><li data-p="fourth.html" data-idx="5" class="ispage">fourth.html</li></ul></li></ul></li></ul>
+
+<script type="text/javascript">
+
+
+	$('li').on('click', function() {
+	    console.log("clicked");
+	    $(this).children('ul').toggle();
+	    return false;  
+	});
+</script>
